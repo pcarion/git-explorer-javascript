@@ -1,0 +1,22 @@
+{
+  "name": "git-explorer",
+  "version": "0.1.0",
+  "description": "environment to explore the .git directory behavior when using git",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pcarion/git-explorer.git"
+  },
+  "author": "Pierre Carion",
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/pcarion/git-explorer/issues"
+  },
+  "homepage": "https://github.com/pcarion/git-explorer",
+  "dependencies": {
+    "gulp": "^3.8.10"
+  }
+}
