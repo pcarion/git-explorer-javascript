@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/pcarion/git-explorer",
   "dependencies": {
-    "gulp": "^3.8.10"
+    "gulp": "^3.8.10",
+    "moment": "^2.8.4"
   }
 }
