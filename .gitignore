@@ -30,3 +30,4 @@ node_modules
 
 *.sublime-workspace
 log.txt
+log
