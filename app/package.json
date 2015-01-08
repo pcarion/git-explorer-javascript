@@ -2,7 +2,7 @@
   "name": "git-explorer",
   "version": "0.1.0",
   "description": "environment to explore the .git directory behavior when using git",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/pcarion/git-explorer",
   "dependencies": {
-    "gulp": "^3.8.10"
+    "moment": "^2.8.4",
+    "react": "^0.12.2"
   }
 }
