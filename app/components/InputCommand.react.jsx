@@ -1,10 +1,10 @@
-(function() {}(
-  var ChatMessageActionCreators = require('../actions/ChatMessageActionCreators');
+(function() {
+  //var ChatMessageActionCreators = require('../actions/ChatMessageActionCreators');
   var React = require('react');
 
   var ENTER_KEY_CODE = 13;
 
-  var MessageComposer = React.createClass({
+  var InputCommand = React.createClass({
 
     getInitialState: function() {
       return {
@@ -14,19 +14,17 @@
 
 
     render: function() {
-      return ( 
-        <textarea 
-          className = "message-composer"
-          name = "message"
-          value = {
-            this.state.text
-          }
-          onChange = {
-            this._onChange
-          }
-          onKeyDown = {
-            this._onKeyDown
-          }
+      return ( <textarea className = "message-composer"
+        name = "message"
+        value = {
+          this.state.text
+        }
+        onChange = {
+          this._onChange
+        }
+        onKeyDown = {
+          this._onKeyDown
+        }
         />
       );
     },
@@ -42,7 +40,7 @@
         event.preventDefault();
         var text = this.state.text.trim();
         if (text) {
-          ChatMessageActionCreators.createMessage(text);
+          //ChatMessageActionCreators.createMessage(text);
         }
         this.setState({
           text: ''
@@ -52,4 +50,5 @@
 
   });
 
-  module.exports = MessageComposer;));
+  module.exports = InputCommand;
+})();

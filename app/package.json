@@ -18,6 +18,7 @@
   "homepage": "https://github.com/pcarion/git-explorer",
   "dependencies": {
     "moment": "^2.8.4",
+    "node-jsx": "^0.12.4",
     "react": "^0.12.2"
   }
 }
