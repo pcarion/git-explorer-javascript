@@ -1,5 +1,5 @@
 (function() {
-  //var ChatMessageActionCreators = require('../actions/ChatMessageActionCreators');
+  var CommandAction = require('../actions/CommandAction');
   var React = require('react');
 
   var ENTER_KEY_CODE = 13;
@@ -40,7 +40,7 @@
         event.preventDefault();
         var text = this.state.text.trim();
         if (text) {
-          //ChatMessageActionCreators.createMessage(text);
+          CommandAction.newCommand(text);
         }
         this.setState({
           text: ''
