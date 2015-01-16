@@ -10,7 +10,7 @@
   var PayloadSources = AppConstants.PayloadSources;
 
   function ChatAppDispatcher() {
-
+    Dispatcher.call(this);
   }
 
   util.inherits(ChatAppDispatcher, Dispatcher);

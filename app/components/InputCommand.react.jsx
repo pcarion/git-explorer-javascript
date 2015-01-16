@@ -1,6 +1,7 @@
 (function() {
   var CommandAction = require('../actions/CommandAction');
   var React = require('react');
+  var CommandStore = require('../stores/CommandStore');
 
   var ENTER_KEY_CODE = 13;
 
