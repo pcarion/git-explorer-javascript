@@ -1,65 +1,47 @@
 (function() {
-  var AppDispatcher = require('../dispatcher/AppDispatcher');
-  var EventEmitter = require('events').EventEmitter;
-  var AppConstants = require('../constants/AppConstants');
-  var util = require('util');
+  var Reflux = require('reflux');
+  var Actions = require('../actions/Actions');
   var exec = require('child_process').exec;
 
   var CHANGE_EVENT = 'change';
 
 
-  function executeCommand(cmd) {
-    console.log("execute command:" + cmd);
+  // Creates a DataStore
+  module.exports = Reflux.createStore({
 
-    var child = exec(cmd,
-      function(error, stdout, stderr) {
-        console.log("" + stdout);
+    // Initial setup
+    init: function() {
 
-        if (stderr.size > 0) {
-          console.log('stderr: ' + stderr);
-        }
-        if (error !== null) {
-          console.log('exec error: ' + error);
-        }
-      });
-  }
+      // Register statusUpdate action
+      this.listenTo(Actions.commandNew, this.commandNew);
+    },
 
-  function CommandStore() {
-    EventEmitter.call(this);
-  }
+    // Callback
+    commandNew: function(action) {
+      var cmd = action.cmd;
+      console.log("execute command:", cmd);
+      var self = this;
 
-  util.inherits(CommandStore, EventEmitter);
+      var result = {};
 
+      var child = exec(cmd,
+        function(error, stdout, stderr) {
+          result.error = error;
 
-  CommandStore.prototype.emitChange = function() {
-    this.emit(CHANGE_EVENT);
-  };
-
-  /**
-   * @param {function} callback
-   */
-  CommandStore.prototype.addChangeListener = function(callback) {
-    this.on(CHANGE_EVENT, callback);
-  };
-
-  CommandStore.prototype.removeChangeListener = function(callback) {
-    this.removeListener(CHANGE_EVENT, callback);
-  };
-
-  // Register callback to handle all updates
-  AppDispatcher.register(function(payload) {
-    var action = payload.action;
-    console.log("@@@ CommandStore: ", action);
-
-    switch (action.type) {
-      case AppConstants.ActionTypes.NEW_COMMAND:
-        executeCommand(action.text.trim());
-        break;
-
-      default:
-        // no op
+          if (stdout.length > 0) {
+            result.stdout = stdout.toString("utf8").split(/\r?\n/);
+          } else {
+            result.stdout = [];
+          }
+          if (stderr.length > 0) {
+            result.stderr = stderr.toString("utf8").split(/\r?\n/);
+          } else {
+            result.stderr = [];
+          }
+          self.trigger(result);
+        });
     }
+
   });
 
-  module.exports = new CommandStore();
 })();

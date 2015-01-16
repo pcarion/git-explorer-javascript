@@ -1,11 +1,13 @@
 (function() {
-  var CommandAction = require('../actions/CommandAction');
+  var Reflux = require('reflux');
+  var Actions = require('../actions/Actions');
   var React = require('react');
   var CommandStore = require('../stores/CommandStore');
 
   var ENTER_KEY_CODE = 13;
 
   var InputCommand = React.createClass({
+    mixins: [Reflux.listenTo(CommandStore,"onCommandStoreResult")],
 
     getInitialState: function() {
       return {
@@ -41,12 +43,18 @@
         event.preventDefault();
         var text = this.state.text.trim();
         if (text) {
-          CommandAction.newCommand(text);
+          Actions.commandNew({
+            cmd: text
+          });
         }
         this.setState({
           text: ''
         });
       }
+    },
+
+    onCommandStoreResult: function(result) {
+      console.log("Result:", result);
     }
 
   });
