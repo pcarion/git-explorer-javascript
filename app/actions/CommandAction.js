@@ -9,7 +9,7 @@
 
     newCommand: function(text) {
       AppDispatcher.handleViewAction({
-        type: ActionTypes.NEW_COMMAND,
+        type: AppConstants.ActionTypes.NEW_COMMAND,
         text: text
       });
     }
