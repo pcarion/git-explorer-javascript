@@ -20,7 +20,6 @@
     "keymirror": "^0.1.1",
     "moment": "^2.8.4",
     "node-jsx": "^0.12.4",
-    "object-assign": "^2.0.0",
     "react": "^0.12.2"
   }
 }
