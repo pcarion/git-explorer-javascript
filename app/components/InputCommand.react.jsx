@@ -7,17 +7,19 @@
   var ENTER_KEY_CODE = 13;
 
   var InputCommand = React.createClass({
-    mixins: [Reflux.listenTo(CommandStore,"onCommandStoreResult")],
+    mixins: [Reflux.listenTo(CommandStore, "onCommandStoreResult")],
 
     getInitialState: function() {
       return {
-        text: ''
+        text: '',
+        result: ''
       };
     },
 
 
     render: function() {
-      return ( <textarea className = "message-composer"
+      return ( <div>
+        <textarea className = "message-composer"
         name = "message"
         value = {
           this.state.text
@@ -29,6 +31,9 @@
           this._onKeyDown
         }
         />
+        <br/>
+        <textarea className = "tbd" name="result" value= { this.state.result}/> 
+        </div>
       );
     },
 
@@ -48,13 +53,18 @@
           });
         }
         this.setState({
-          text: ''
+          text: '',
+          result: ''
         });
       }
     },
 
     onCommandStoreResult: function(result) {
       console.log("Result:", result);
+        this.setState({
+          result: result.stdout.join("\n")
+        });
+
     }
 
   });

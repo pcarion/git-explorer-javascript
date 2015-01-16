@@ -3,9 +3,6 @@
   var Actions = require('../actions/Actions');
   var exec = require('child_process').exec;
 
-  var CHANGE_EVENT = 'change';
-
-
   // Creates a DataStore
   module.exports = Reflux.createStore({
 
@@ -19,7 +16,6 @@
     // Callback
     commandNew: function(action) {
       var cmd = action.cmd;
-      console.log("execute command:", cmd);
       var self = this;
 
       var result = {};

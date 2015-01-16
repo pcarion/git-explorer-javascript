@@ -4,7 +4,7 @@
   var Reflux = require('reflux');
 
   var Actions = Reflux.createActions([
-    "commandNew",
+    "commandNew",  // emitted when a new command has to be executed
     "statusEdited",
     "statusAdded"
   ]);
