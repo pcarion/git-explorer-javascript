@@ -2,12 +2,14 @@
   var Reflux = require('reflux');
   var Actions = require('../actions/Actions');
   var React = require('react');
-  var CommandStore = require('../stores/CommandStore');
+  var commandStore = require('../stores/CommandStore');
+  var fileSystemStore = require('../stores/FileSystemStore');
+
 
   var ENTER_KEY_CODE = 13;
 
   var InputCommand = React.createClass({
-    mixins: [Reflux.listenTo(CommandStore, "onCommandStoreResult")],
+    mixins: [Reflux.listenTo(commandStore, "onCommandStoreResult"),Reflux.listenTo(fileSystemStore, "onFileSystemChange")],
 
     getInitialState: function() {
       return {
@@ -60,11 +62,13 @@
     },
 
     onCommandStoreResult: function(result) {
-      console.log("Result:", result);
-        this.setState({
-          result: result.stdout.join("\n")
-        });
+      this.setState({
+        result: result.stdout.join("\n")
+      });
+    },
 
+    onFileSystemChange: function(result) {
+      console.log("@@ onFileSystemChange:", result);
     }
 
   });
