@@ -1,4 +1,5 @@
 (function() {
+  "use strict";
   var Reflux = require('reflux');
   var Actions = require('../actions/Actions');
   var React = require('react');
@@ -19,27 +20,7 @@
     },
 
 
-    render: function() {
-      return ( <div>
-        <textarea className = "message-composer"
-        name = "message"
-        value = {
-          this.state.text
-        }
-        onChange = {
-          this._onChange
-        }
-        onKeyDown = {
-          this._onKeyDown
-        }
-        />
-        <br/>
-        <textarea className = "tbd" name="result" value= { this.state.result}/> 
-        </div>
-      );
-    },
-
-    _onChange: function(event, value) {
+    _onChange: function(event) {
       this.setState({
         text: event.target.value
       });
@@ -69,7 +50,27 @@
 
     onFileSystemChange: function(result) {
       console.log("@@ onFileSystemChange:", result);
+    },
+
+    render: function() {
+      /* jshint ignore:start */
+      return ( 
+        <div>
+          <textarea className = "message-composer"
+                         name = "message"
+                        value = { this.state.text }
+                     onChange = { this._onChange }
+                    onKeyDown = { this._onKeyDown }
+          />
+          <br/>
+          <textarea className = "tbd" 
+                        name  = "result" 
+                        value = { this.state.result}/> 
+        </div>
+      );
+      /* jshint ignore:end */
     }
+
 
   });
 
