@@ -10,7 +10,7 @@
   var ENTER_KEY_CODE = 13;
 
   var InputCommand = React.createClass({
-    mixins: [Reflux.listenTo(commandStore, "onCommandStoreResult"),Reflux.listenTo(fileSystemStore, "onFileSystemChange")],
+    mixins: [Reflux.listenTo(commandStore, "onCommandStoreResult"), Reflux.listenTo(fileSystemStore, "onFileSystemChange")],
 
     getInitialState: function() {
       return {
