@@ -37,3 +37,11 @@ body > .container {
 code {
   font-size: 80%;
 }
+
+
+.ge-result{
+  font-family: 'Courier New', Courier, 'Lucida Sans Typewriter', 'Lucida Typewriter', monospace;
+  font-size: 12px;
+  font-style: normal;
+  font-variant: normal;
+}

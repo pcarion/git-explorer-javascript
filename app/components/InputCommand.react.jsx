@@ -15,6 +15,7 @@
     getInitialState: function() {
       return {
         text: '',
+        error: '',
         result: ''
       };
     },
@@ -44,6 +45,8 @@
 
     onCommandStoreResult: function(result) {
       this.setState({
+        text: '',
+        error: result.stderr.join("\n"),
         result: result.stdout.join("\n")
       });
     },
@@ -53,19 +56,48 @@
     },
 
     render: function() {
+      var error ;
+
+      if (this.state.error.trim().length > 0) {
+        error = (
+            <div className="alert alert-danger" role="alert">
+              <span className="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span className="sr-only">Error:</span>
+              { this.state.error }
+            </div>          
+          );
+      } else {
+        error = <div/>
+      }
       /* jshint ignore:start */
       return ( 
         <div>
-          <textarea className = "message-composer"
-                         name = "message"
-                        value = { this.state.text }
-                     onChange = { this._onChange }
-                    onKeyDown = { this._onKeyDown }
-          />
-          <br/>
-          <textarea className = "tbd" 
-                        name  = "result" 
-                        value = { this.state.result}/> 
+          <div className="input-group">
+            <span className="input-group-addon" 
+                         id="basic-addon1">
+              <span className="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+            </span>
+            <input type="text" 
+              className="form-control" 
+            placeholder="command" 
+                  value={ this.state.text }
+               onChange={ this._onChange }
+              onKeyDown={ this._onKeyDown }
+       aria-describedby="basic-addon1"/>
+          </div>
+          { error }
+          <div className="input-group">
+            <span className="input-group-addon" 
+                         id="sizing-addon3">
+              <span className="glyphicon glyphicon-film" aria-hidden="true"></span>
+            </span>
+            <textarea className="form-control ge-result" 
+               aria-describedby="sizing-addon3"
+                           rows="5"
+                       readOnly="true"
+                          value={ this.state.result }/>
+          </div>
+
         </div>
       );
       /* jshint ignore:end */
